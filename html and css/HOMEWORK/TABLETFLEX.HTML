@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>flex</title>
+    <link rel="stylesheet" href="tablet.css">
+    <link rel="stylesheet" href="responsive.css">
+    <style>
+        .hamburger{
+            cursor: pointer;
+            position: fixed;
+            top: 15px;
+            right: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            width: 5%;
+            flex-direction: column;
+           
+        }
+        .hamburger >span{
+            background-color: black;
+            height: 2px;
+            margin-bottom: 10px;
+            transition: transform 0.74s ease-in-out;
+        }
+        .hamburger:hover{
+            top: 25px;
+            width: 3%;
+        }
+        .hamburger:hover > span:nth-child(1){
+           transform: rotate(-45deg)  translate(-9px,10px);
+           /* background-color: blueviolet; */
+           
+        }
+        .hamburger:hover > span:nth-child(2){
+           transform: rotate(45deg);
+        }
+        .hamburger:hover > span:nth-child(3){
+          display: none;
+        }
+
+    </style>
+</head>
+<body>
+
+   
+<div class="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+
+    <header>
+       
+        <h1>HEADER</h1>
+    </header>
+    <mid>
+        <h1>MAIN</h1>
+    </mid>
+    <main>
+        <div class="left">LEFT</div>
+        <div class="right">RIGHT</div>
+    </main>
+    <footer>
+        <h1>FOOTER</h1>
+    </footer>
+<br>
+<br>
+<br>
+<br>
+   
+
+</body>
+</html>

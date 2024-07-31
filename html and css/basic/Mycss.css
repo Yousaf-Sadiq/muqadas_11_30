@@ -1,0 +1,49 @@
+
+
+*{
+  box-sizing: border-box;
+}
+
+.bg-image {
+  background-image: url("./1.jpg");
+
+  background-position: 100% 40%;
+  background-size: cover;
+  /* background-clip: border-box; */
+  width: 100%;
+  padding: 15px;
+
+  height: 660px;
+  text-align: center;
+}
+
+ul {
+  display: inline-block;
+  list-style-type: none;
+}
+header{
+  background-color: rebeccapurple;
+}
+nav {
+ 
+  color: white;
+  font-weight: bolder;
+  width: 100%;
+}
+
+/* combinator's */
+ul > li > a {
+  color: white;
+  font-weight: bolder;
+  transition: all 0.7s ease-in-out;
+  text-decoration: none;
+}
+ul > li {
+  display: inline-block;
+  margin-right: 20px;
+ 
+}
+
+ul > li:hover a {
+    color: #222;
+}

@@ -1,0 +1,89 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.bg-image {
+  background-image: url("https://mobirise.com/extensions/commercem4/headphones/assets/images/malte-wingen-381988-1920x1280.jpg");
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+
+  height: 900px;
+}
+
+.navbar {
+  background-color: rgb(250, 199, 105);
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  padding: 2rem;
+  position: fixed;
+  top: -500px;
+  width: 100%;
+  transition: top 0.75s ease-in-out;
+}
+.navbar > ul {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+.navbar > ul > li {
+  display: flex;
+  flex-wrap: wrap;
+  /* flex-direction: column; */
+  justify-content: center;
+  align-content: center;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+.header {
+  position: fixed;
+  top: 0px;
+}
+.menu-btn {
+  display: flex;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  position: fixed;
+  width: 3%;
+  top: 20px;
+  right: 15px;
+  z-index: 100;
+}
+
+.menu-btn > span {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  background-color: black;
+  height: 2px;
+  width: 100%;
+  margin-bottom: 8px;
+  transition: transform 0.74s ease-in-out;
+}
+
+#checked{
+    display: none;
+}
+
+#checked:checked ~ .navbar{
+    top: 0px;
+}
+
+#checked:checked ~ .menu-btn >span:nth-child(1){
+    transform: rotate(45deg) translate(5px, 5px);
+}
+#checked:checked ~ .menu-btn >span:nth-child(2){
+    display: none;
+}
+
+#checked:checked ~ .menu-btn >span:nth-child(3){
+    transform: rotate(-45deg);
+}
+

@@ -1,0 +1,72 @@
+/* grid naming sytem */
+.d-grid {
+  background-color: brown;
+  display: grid;
+  /* gap: 10px; */
+  /* grid-template-columns: repeat(3,minmax(min-content,max-content)); */
+  /* justify-content: center; */
+  /* align-content: center; */
+  /* text-align: center; */
+  /* height: 100vh; */
+  /* grid-template-rows: 50px 1fr 30px; */
+  grid-template-columns: repeat(6,1fr);
+
+  grid-template-areas:
+    "header header header header header header "
+    "left  left  main   main  right  right"
+    "left  left  main   main  right  right"
+    "footer footer footer footer footer footer";
+}
+.child {
+  padding: 1rem;
+  background-color: rebeccapurple;
+  color: white;
+  font-weight: bolder;
+  border: 1px solid black;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  /* margin: 1rem; */
+}
+
+.item1 {
+  grid-area: header;
+  /* grid-column-start: 3;
+  grid-column-end: 4;
+
+  grid-row-start: 3;
+  grid-row-end: 4; 
+  span 
+  */
+
+  /* grid-area: grid-row-start / grid-column-start / grid-row-end / grid-column-end | itemname; */
+  /* grid-area:2/3/3/ 4 ; */
+  /* grid-area:1/1/1/ span 3 ; */
+}
+
+.item2 {
+  grid-area: left;
+ 
+  /* grid-area:2/1/ span 2 /2 ; */
+}
+.item3 {
+  grid-area: main;
+  /* grid-area:2/3/ span 2 /4 ; */
+}
+.item4 {
+  grid-area: right;
+  /* grid-area:2/3/ span 2 /4 ; */
+}
+
+.item5 {
+  grid-area: footer;
+
+  /* grid-area:5/1/6/ span 3; */
+
+  /* grid-column-start: 2;
+    grid-column-end: 3;
+  
+    grid-row-start: 1;
+    grid-row-end: 2;  */
+}

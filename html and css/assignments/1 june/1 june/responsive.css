@@ -1,0 +1,21 @@
+@media screen and (min-width: 992px) and (max-width: 1200px) {
+
+  .d-grid {
+    grid-template-areas:
+      "header header header header header header "
+      "main   main  main  main   main   main  "
+      "left  left   left  right  right  right"
+      "footer footer footer footer footer footer";
+  }
+}
+
+@media screen and (min-width: 500px) and (max-width: 991px) {
+    .d-grid {
+        grid-template-areas:
+          "header header header header header header "
+          "main   main  main  main   main   main  "
+          "left   left   left   left  left    left  "
+          "right  right  right  right  right  right"
+          "footer footer footer footer footer footer";
+      }
+}

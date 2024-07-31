@@ -1,0 +1,47 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+header{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 1rem;
+  background-color: #F97171;
+}
+footer{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 1rem;
+  background-color: #72C2F1;
+}
+
+main{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+main >div{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 1rem;
+  height: 450px;
+  font-size: 1.5rem;
+}
+
+.main{
+width: 45%;
+}
+
+.left{
+  flex: 1;
+  background-color: #F5D55F;
+}
+.right{
+  flex: 1;
+
+  background-color: #C5ED77;
+}

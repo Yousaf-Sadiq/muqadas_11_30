@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>form</title>
+    <style>
+      form {
+        background-color: #f2f2f2;
+        padding: 20px;
+        border: 3px solid black;
+      }
+      input[type="password"],
+      input[type="text"] {
+        padding: 5px;
+        /* width: 100%; */
+        background-color: transparent;
+        outline: none;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+      }
+      select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid black;
+      }
+
+      input[type="radio"] {
+        margin-top: 10px;
+      }
+
+      textarea {
+        width: 100%;
+        height: 100px;
+        padding: 10px;
+        border: 1px solid black;
+      }
+      label {
+        display: block;
+        margin-bottom: 10px;
+      }
+      ::placeholder {
+        color: rebeccapurple;
+      }
+      .d-inline-block {
+        /* width: 100%; */
+        display: inline-block;
+        /* text-align: center; */
+      }
+    </style>
+  </head>
+  <body>
+    <form>
+      <div class="d-inline-block">
+        <label for="name">Name:</label>
+        <input
+          type="text"
+          id="name"
+          placeholder="ENTER NAME "
+          name="name"
+          required
+        />
+      </div>
+
+      <div class="d-inline-block">
+        <img
+          style="display: inline-block"
+          src="./1.jpg"
+          width="100"
+          height="100"
+          alt=""
+        />
+      </div>
+
+      <label for="pswd">PASSWORD:</label>
+      <input type="password" id="pswd" name="abc" required /><br /><br />
+
+      <label for="gender">Gender:</label>
+
+      <input type="radio" id="male" name="gender" value="male" />
+      <label for="male" style="display: inline"> Male </label>
+
+      <input type="radio" name="gender" id="female" value="female" />
+      <label for="female" style="display: inline"> Female </label>
+      <br /><br />
+      <label for="country">Country:</label>
+      <select id="country" name="country">
+        <optgroup label="Country">
+          <option value="PAKISTAN">PAKISTAN</option>
+          <option value="USA">USA</option>
+          <option value="CANADA">CANADA</option>
+        </optgroup>
+        <optgroup label="city">
+          <option value="">LAHORE</option>
+          <option value="">KARACHI</option>
+        </optgroup>
+      </select>
+
+      <br /><br />
+      <label for="message">Message:</label>
+      <textarea id="message" name="message"></textarea><br /><br />
+      <input
+        type="submit"
+        value="Submit"
+        style="background-color: green; color: white"
+      />
+    </form>
+
+    <div style="border: 1px solid black">dsa</div>
+    <!-- semantic tag  -->
+
+    <div>
+      <div></div>
+    </div>
+
+    <div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+
+    <div></div>
+
+    <!--  -->
+    <header>
+      <nav>
+        <ul>
+          <li>
+            <a href="./float.html">HOME</a>
+          </li>
+          <li>
+            <a href="./abc_1234.html">CONTACT US</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section></section>
+      <section></section>
+      <section></section>
+      <section></section>
+    </main>
+
+    <footer></footer>
+
+    <!-- <abc style="display: block;"></abc> -->
+  </body>
+</html>

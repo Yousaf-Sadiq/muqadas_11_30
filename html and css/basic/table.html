@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <!-- 
+      css type 
+
+      inline css
+      internal css
+      external css
+
+
+     -->
+    <style>
+      /* 
+      selectors 
+      1. element selector
+      2. class selector
+      3. id selector
+
+      ==============================
+      4. attribute selector
+      5. pseudo class selector
+      6. pseudo element selector
+
+*/
+      table {
+        border-collapse: collapse;
+      }
+
+      table,
+      td,
+      th {
+        border-style: dashed;
+      }
+    </style>
+  </head>
+  <body>
+    <table border="1" cellpadding="10" style="border-color: red">
+      <thead>
+        <tr>
+          <th style="background-color: rebeccapurple; color: white">ID</th>
+          <th>Name</th>
+          <th>ADDRESS</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <!-- row 1 -->
+        <tr>
+          <td rowspan="3" style="background-color: rebeccapurple; color: white">
+            1
+          </td>
+          <td>XYZ</td>
+          <td>XYZ address</td>
+        </tr>
+        <tr>
+          <td colspan="2">2</td>
+        </tr>
+        <tr>
+          <td colspan="2">2</td>
+        </tr>
+        <!-- row 2 -->
+        <tr>
+          <td style="background-color: rebeccapurple; color: white">2</td>
+          <td>XYZ</td>
+          <td>XYZ address</td>
+        </tr>
+        <!-- ================================ -->
+      </tbody>
+    </table>
+    <!-- ============================================================ -->
+    <br />
+    <table cellpadding="10">
+      <tr>
+        <th>statistic</th>
+        <th colspan="3">statistic</th>
+      </tr>
+
+      <tr>
+        <th>
+          column 1 <br />
+          column n
+        </th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </table>
+    
+  </body>
+</html>

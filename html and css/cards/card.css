@@ -1,0 +1,58 @@
+.card_section {
+  padding: 2rem;
+}
+/* 1 rem => 16px  */
+
+.card {
+  display: inline-block;
+  margin-right: 2rem;
+  margin-bottom: 2rem;
+
+  width: 30%;
+  height: auto;
+  border: 1px solid black;
+  border-radius: 10% 0px 10% 0px;
+  
+  
+  /* box-shadow: inset/outset x y sharpness spreadness color; */
+   
+  box-shadow:  3px 6px 8px black ;
+  
+}
+.card-head {
+  width: 100%;
+}
+.card-head > img {
+  width: 100%;
+  border-radius: 14% 0px 16% 0px;
+}
+.card-body {
+  padding: 15px;
+}
+.card-body > p {
+  text-align: justify;
+  letter-spacing: 2px;
+}
+
+.card-body > button {
+  outline: none;
+  border-radius: 60px;
+  padding: 0.7rem;
+
+  border: none;
+
+  background-color: #eda601;
+  color: aliceblue;
+  font-weight: bolder;
+  cursor: pointer;
+}
+
+.card-body > button:hover {
+  background-color: rgb(189, 132, 1);
+  color: white;
+}
+
+.card-body > button:active{
+    background-color: rgb(83, 59, 1);
+
+}

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>images</title>
+
+    <style>
+      img{
+        border-radius: 50px ;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 
+
+        relative link and absolute 
+
+relative link :
+        C://abc/images.html
+
+absolute link :
+        https://www.google.com/abc/images.html
+
+
+src=> source
+alt => alternate tag
+     -->
+
+    <!-- case 1 
+        if image file is beside to html file
+    -->
+
+    <!-- <img src="./1.jpg" width="500" height="500" alt="image name" /> -->
+
+    <!-- case 2
+        if image file is inside folder and html file is outside that folder 
+    -->
+    <!-- <img src="./assignments/1.jpg" width="500" height="500" alt="image name" /> -->
+
+    <!-- 
+        case 3 :
+        if html file is inside folder and image file is outside that folder
+
+     -->
+
+    <!-- anchor tag -->
+
+    <a href="../1.jpg">
+      <img src="../1.jpg" width="500" height="500" alt="image name" />
+    </a>
+
+    <a href="https://www.google.com"> google </a>
+
+    <!--  
+
+      ol => order list 
+      ul => unordered list
+      dl => description list 
+              li => list item
+    -->
+
+    <ul>
+      <li>COFFEE</li>
+      <li>TEA</li>
+    </ul>
+
+    <!-- dt => description title -->
+    <!-- dd => description data/detail -->
+    <dl>
+      <dt>What is computer?</dt>
+      <dd>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eaque repellat
+        totam nesciunt alias pariatur error sunt impedit eveniet eos
+        reprehenderit.
+      </dd>
+    </dl>
+
+    <!-- nested list 
+   hint : float 
+    -->
+
+    <ol>
+      <li>
+        <ul>
+          <li>
+            <dl>
+              <dt>Coffee</dt>
+              <dd>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt
+                quasi modi nesciunt aspernatur.
+              </dd>
+            </dl>
+          </li>
+        </ul>
+      </li>
+    </ol>
+
+    <div style="border: 1px solid black;">
+      abc
+    </div>
+ 
+ 
+  </body>
+</html>

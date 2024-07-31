@@ -1,0 +1,38 @@
+@media screen and (min-width:600px) and (max-width:900px) 
+{
+    header{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 1rem;
+        background-color: #f97171;
+    }
+    main{
+       flex-direction: column;
+    }
+    .left{
+        /* width: 100%; */
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 2rem;
+        background-color: #f5d55f;
+    }
+    .right{
+        display: flex;
+        /* width: 100%; */
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 2rem;
+        background-color: #c5ed77;
+    }
+    footer{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 1rem;
+        background-color: #72c2f1;
+    }
+}
+
+
