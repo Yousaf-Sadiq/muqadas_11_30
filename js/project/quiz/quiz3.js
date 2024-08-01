@@ -52,11 +52,24 @@ function displayQuiz() {
         currentQuiz.choices.forEach(function (val) {
 
 
-        //     <tr>
-        //     <td><input type="radio" name="" id="abc" /></td>
-        //     <td><label for="abc">computer</label></td>
-        //   </tr>
-        
+            //     <tr>
+            //     <td><input type="radio" name="" id="abc" /></td>
+            //     <td><label for="abc">computer</label></td>
+            //   </tr>
+
+            let tr = document.createElement("tr");
+
+            options.appendChild(tr)
+
+
+            let td1 = document.createElement("td");
+
+
+
+            tr.appendChild(td1);
+
+
+
             let input = document.createElement("input");
 
             input.type = "radio";
@@ -65,16 +78,23 @@ function displayQuiz() {
             input.setAttribute("id", `${val}`);
             input.name = "quiz";
 
+
+            td1.appendChild(input);
+
+            let td2 = document.createElement("td");
+
+            tr.appendChild(td2);
+
+
             let label = document.createElement("label");
             label.innerHTML = val;
             label.setAttribute("for", `${val}`)
 
 
 
-            options.appendChild(input)
+            // options.appendChild(input)
 
-
-            input.after(label)
+            td2.appendChild(label)
         })
 
 
@@ -182,7 +202,7 @@ function displayResult() {
     let next = document.querySelector("#NEXT");
     next.innerHTML = "RESET QUIZ";
     next.onclick = function () {
-            reset()
+        reset()
     }
 
 
@@ -231,9 +251,9 @@ function showWrong() {
     options.innerHTML = html
 }
 
-function reset(){
+function reset() {
     score = 0;
-    index=0;
+    index = 0;
     wrongQuiz = [];
     displayQuiz();
 }
