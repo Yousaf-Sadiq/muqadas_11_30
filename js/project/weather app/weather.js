@@ -73,6 +73,7 @@ if (data.weather[0].main == "Clouds") {
 }
 
   let output = "";
+  
   for (const key in data) {
     // output += data[key] +"<br>";
 
@@ -107,6 +108,6 @@ if (data.weather[0].main == "Clouds") {
   }
 
 
-  
+
   result.innerHTML=output;
 }
