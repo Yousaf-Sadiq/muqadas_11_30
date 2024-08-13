@@ -23,6 +23,9 @@
 // 4. Convert temperatures from Celsius to Fahrenheit and Fahrenheit to Celsius.
     
 
+// http://localhost/11_30_muqadas/php/class1.php
+
+
 
 // 1. Check two given numbers and return true if one of the numbers is 50 or if their sum is 50.
 // 2. Check from the given integer, whether it is positive or negative.
@@ -36,6 +39,8 @@
 // equal), or "Scalene" (no sides are equal)
 // 8. Check from the given month (1-12) if it's "Winter" (December-February), "Spring"
 // (March-May), "Summer" (June-August), or "Autumn" or "Fall" (September-November).
+
+
     $sum = 2 + 4;
 
     echo "<br><h1> SUM is {$sum}</h1>";
