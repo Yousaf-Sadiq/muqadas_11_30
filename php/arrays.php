@@ -12,6 +12,8 @@
 
     <?php
 
+use function PHPSTORM_META\type;
+
     function pre($x)
     {
 
@@ -90,7 +92,19 @@
     // 5. remoce the array element from the specified index
     
 
+    $abc = [
+        "name" => "John",
+        "age" => 30,
+        "city" => "New York",
 
+    ];
+
+    // var_dump($abc);
+
+foreach ($abc as  $k => $v) {
+    # code...
+    echo  " {$k} : {$v} <br>";
+}
 
 
     ?>
