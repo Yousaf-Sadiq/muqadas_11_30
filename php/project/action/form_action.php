@@ -2,6 +2,8 @@
 
 require_once dirname(__DIR__) . "/layouts/admin/header.php";
 
+// __FILE__
+// __DIR__ 
 ?>
 
 <!-- ======================================================= -->
@@ -36,7 +38,14 @@ if (isset($_POST["inserts"]) && !empty($_POST["inserts"])) {
         $status['error']++;
         //    $status['msg'][]="Email is required";
         array_push($status['msg'], "EMAIL IS REQUIRED");
+    } else {
+        
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $status['error']++;
+            array_push($status['msg'], "Invalid Email");
+        }
     }
+
 
 
     if (!isset($pswd) || empty($pswd)) {
@@ -47,6 +56,15 @@ if (isset($_POST["inserts"]) && !empty($_POST["inserts"])) {
     }
 
 
+    $check = "SELECT * FROM `" . USER . "` WHERE `email` = '{$email}'";
+    $check_exe = $conn->query($check);
+
+    if ($check_exe->num_rows > 0) {
+
+        $status['error']++;
+        array_push($status['msg'], "EMAIL ALREADY EXISTS");
+    }
+
 
 
     if ($status["error"] > 0) {
@@ -55,7 +73,32 @@ if (isset($_POST["inserts"]) && !empty($_POST["inserts"])) {
             ErrorMsg($value);
         }
 
-        RefreshUrl(2,DASHBOARD);
+        RefreshUrl(2, DASHBOARD);
+    } else {
+
+        $H_password = password_hash($pswd, PASSWORD_BCRYPT);
+
+        $encrpt = base64_encode($pswd);
+
+        $insert_q = "INSERT INTO `" . USER . "`(`email`, `password`, `ptoken`)
+        VALUES ('{$email}','{$H_password}','{$encrpt}')";
+
+        $insert_exe = $conn->query($insert_q);
+
+        if ($insert_exe) {
+
+            if ($conn->affected_rows > 0) {
+                SuccessMsg("DATA HAS BEEN INSERTED");
+            } else {
+                ErrorMsg("DATA HAS NOT BEEN INSERTED");
+            }
+        } else {
+            ErrorMsg("ERROR IN QUERY  {$insert_q}");
+        }
+
+
+        RefreshUrl(2, DASHBOARD);
+
     }
 
 }

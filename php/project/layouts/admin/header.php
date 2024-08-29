@@ -3,6 +3,7 @@
 require_once dirname(__DIR__)."/../includes/connection.php";
 require_once dirname(__DIR__)."/../includes/web.php";
 require_once dirname(__DIR__)."/../includes/helper.php";
+require_once dirname(__DIR__)."/../includes/table.php";
 
 ?>
 <!doctype html>
