@@ -1,15 +1,49 @@
+
 <?php
-require_once dirname(__FILE__) . "/layouts/admin/header.php";
-// echo dirname(__FILE__); // relative url
-// echo __FILE__;
-// echo __DIR__;
+require_once dirname(__DIR__) . "/layouts/header.php";
 ?>
+<style>
+
+   .navbar {
+    background-color: #7a288a !important;
+    color: white;
+}
+.form-control {
+    border: 1px solid #8bc34a;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    
+}
+
+.form-label {
+        font-weight: bold;
+        font-size: 18px;
+        font-family: Arial, sans-serif;
+        color: BLACK;
+    }
+    .btn-primary {
+        background-color:#7a288a;
+        color: #fff;
+        padding: 10px 20px;
+        font-size: 18px;
+        font-family: Arial, sans-serif;
+        border: none;
+        border-radius: 5px;
+    }
+    .form-container { 
+    background-color: #8bc34a; /* Purple color */ 
+    padding: 20px; 
+    border-radius: 5px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+}
+</style>
 
 
 <div class="container mt-5">
-
-<h1> DASHBOARD</h1>
-        <form action="<?php echo INSERTS; ?>" method="post" class="p-5 text-bg-dark">
+    <div class="form-container">
+        <form action="<?php echo INSERTS; ?>" method="post" class="p-5">
 
                 <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Email address</label>
@@ -57,25 +91,12 @@ require_once dirname(__FILE__) . "/layouts/admin/header.php";
 
                                 <?php
                                 while ($row = $all_exe->fetch_assoc()) {
-                                        # code...
-                                        // [
-                                        //         "user_id"=>3,
-                                        //         "user_name"=>"guest"
-                                        // ]
-                                        // http://localhost/11_30_muqadas/php/project/dashboard.php?id=dksa&name=djskajdls
-                                        // url uri
+                        
                                         ?>
-<!-- http://localhost/11_30_muqadas/php/project/edit.php?id=9 -->
                                         <tr class="">
                                                 <td scope="row"><?php echo $row["user_id"]; ?></td>
                                                 <td><?php echo $row["user_name"]; ?></td>
                                                 <td><?php echo $row["email"]; ?></td>
-                                                <td>
-                                                        <a href="<?php echo EDIT ?>?id=<?php echo $row["user_id"]; ?>" class="btn btn-sm btn-info">
-                                                        EDIT     
-                                                        </a>
-
-                                                </td>
                                         </tr>
 
                                 <?php } ?>
@@ -93,6 +114,8 @@ require_once dirname(__FILE__) . "/layouts/admin/header.php";
 
 
 <?php
-require_once dirname(__FILE__) . "/layouts/admin/footer.php";
-// echo dirname(__FILE__);
+require_once dirname(__FILE__) . "/footer.php"
+
+
+
 ?>
