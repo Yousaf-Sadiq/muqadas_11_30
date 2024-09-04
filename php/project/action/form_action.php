@@ -219,6 +219,54 @@ if (isset($_POST["updates"]) && !empty($_POST["updates"])) {
 }
 
 
+
+//  uploads 
+
+
+if (isset($_POST["upload"]) && !empty($_POST["upload"])) {
+
+
+    $file = $_FILES["profile"];
+
+    // pre($file);
+//   abc.jpg
+
+    $file_name = rand(1, 88) . "_" . $file["name"];
+
+    $tmp_name = $file["tmp_name"];
+
+    $dest = rel_url . "assets/uploads/" . $file_name;
+
+    $file_ext = pathinfo($file_name, PATHINFO_EXTENSION);
+
+
+    $file_ext = strtolower($file_ext); // png
+
+
+
+    $ext = ["jpg","png"];
+
+    //            T 
+    if (!in_array($file_ext, $ext)) {
+
+        echo "FILE EXTENTION INVALID";
+
+        return;
+    }
+
+
+
+    if (move_uploaded_file($tmp_name, $dest)) {
+        echo "UPLOADED";
+    } else {
+        echo "NOT UPLOADED";
+    }
+
+// relative path => upload and delete
+// abs path => fetch or show/display 
+
+}
+
 ?>
 
 <!-- -=--========================================================= -->

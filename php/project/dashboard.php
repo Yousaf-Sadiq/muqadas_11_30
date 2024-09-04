@@ -3,12 +3,25 @@ require_once dirname(__FILE__) . "/layouts/admin/header.php";
 // echo dirname(__FILE__); // relative url
 // echo __FILE__;
 // echo __DIR__;
+echo rel_url;
 ?>
 
 
 <div class="container mt-5">
+        <form action="<?php echo INSERTS; ?>" enctype="multipart/form-data" class="p-5 text-bg-dark" method="post">
 
-<h1> DASHBOARD</h1>
+                <div class="mb-3">
+                        <label for="" class="form-label">Choose file</label>
+                        <input type="file" class="form-control" name="profile" id="" placeholder=""
+                                aria-describedby="fileHelpId" />
+                        <div id="fileHelpId" class="form-text">Help text</div>
+                </div>
+
+                <input type="submit" name="upload">
+
+        </form>
+
+        <h1> DASHBOARD</h1>
         <form action="<?php echo INSERTS; ?>" method="post" class="p-5 text-bg-dark">
 
                 <div class="mb-3">
@@ -65,14 +78,15 @@ require_once dirname(__FILE__) . "/layouts/admin/header.php";
                                         // http://localhost/11_30_muqadas/php/project/dashboard.php?id=dksa&name=djskajdls
                                         // url uri
                                         ?>
-<!-- http://localhost/11_30_muqadas/php/project/edit.php?id=9 -->
+                                        <!-- http://localhost/11_30_muqadas/php/project/edit.php?id=9 -->
                                         <tr class="">
                                                 <td scope="row"><?php echo $row["user_id"]; ?></td>
                                                 <td><?php echo $row["user_name"]; ?></td>
                                                 <td><?php echo $row["email"]; ?></td>
                                                 <td>
-                                                        <a href="<?php echo EDIT ?>?id=<?php echo $row["user_id"]; ?>" class="btn btn-sm btn-info">
-                                                        EDIT     
+                                                        <a href="<?php echo EDIT ?>?id=<?php echo $row["user_id"]; ?>"
+                                                                class="btn btn-sm btn-info">
+                                                                EDIT
                                                         </a>
 
                                                 </td>
@@ -82,8 +96,7 @@ require_once dirname(__FILE__) . "/layouts/admin/header.php";
 
                         </tbody>
                 </table>
-        <?php } 
-        else { ?>
+        <?php } else { ?>
 
                 <h3> NO RECORD FOUND</h3>
 

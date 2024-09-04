@@ -4,6 +4,12 @@ require_once dirname(__FILE__) . "/layouts/admin/header.php";
 // echo __FILE__;
 // echo __DIR__;
 // http://localhost/11_30_muqadas/php/project/edit.php?id=9&name=dsads
+if (!isset($_GET["id"]) || empty($_GET["id"])) {
+    Redirect_url(DASHBOARD);
+    # code...
+}
+
+
 $id = filterData($_GET["id"]);
 
 $edit_chk = "SELECT * FROM `" . USER . "` WHERE `user_id`='{$id}'";
@@ -44,8 +50,8 @@ if ($edit_chk_result->num_rows > 0) {
 
         <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">Password</label>
-            <input type="text" value="<?php echo base64_decode($row_edit["ptoken"]) ?>" name="pswd"
-                class="form-control" id="exampleInputPassword1">
+            <input type="text" value="<?php echo base64_decode($row_edit["ptoken"]) ?>" name="pswd" class="form-control"
+                id="exampleInputPassword1">
         </div>
 
         <div class="mb-3 form-check">
