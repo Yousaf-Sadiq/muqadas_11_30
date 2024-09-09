@@ -226,47 +226,51 @@ if (isset($_POST["updates"]) && !empty($_POST["updates"])) {
 if (isset($_POST["upload"]) && !empty($_POST["upload"])) {
 
 
-    $file = $_FILES["profile"];
+
+
+    $ext = ["jpg", "png"];
+
+    $file = File_upload("profile", $ext, "assets/uploads/");
+
+    if ($file == 1) {
+
+        $s = implode(" ", $ext); // array to string 
+
+        $s = strtoupper($s);
+
+        ErrorMsg("{$s}  ONLY ALLOWED");
+    }
+
+
+    if ($file == 7) {
+        ErrorMsg("UPLOADING ERROR");
+    }
+
+
+
 
     // pre($file);
-//   abc.jpg
+// 
 
-    $file_name = rand(1, 88) . "_" . $file["name"];
+    echo json_encode($file);
 
-    $tmp_name = $file["tmp_name"];
-
-    $dest = rel_url . "assets/uploads/" . $file_name;
-
-    $file_ext = pathinfo($file_name, PATHINFO_EXTENSION);
-
-
-    $file_ext = strtolower($file_ext); // png
-
-
-
-    $ext = ["jpg","png"];
-
-    //            T 
-    if (!in_array($file_ext, $ext)) {
-
-        echo "FILE EXTENTION INVALID";
-
-        return;
-    }
-
-
-
-    if (move_uploaded_file($tmp_name, $dest)) {
-        echo "UPLOADED";
-    } else {
-        echo "NOT UPLOADED";
-    }
-
-// relative path => upload and delete
-// abs path => fetch or show/display 
 
 }
 
+
+/**
+ 
+one to one 
+
+one to many 
+
+many to many 
+
+many to one
+
+
+
+ */
 ?>
 
 <!-- -=--========================================================= -->

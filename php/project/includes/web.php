@@ -7,7 +7,7 @@ define("SERVER1","http://localhost/");
 define("SERVER2",$_SERVER['DOCUMENT_ROOT']);
 
 define("folder","11_30_muqadas/php/project/");
-
+    
 
 define("domain1",SERVER1.folder); // absolute url
 

@@ -57,4 +57,57 @@ function pre(array $a)
 }
 
 
+
+
+
+function File_upload(string $input, array $extension, $dest)
+{
+  $file = $_FILES[$input];
+
+  // pre($file);
+  //   abc.jpg
+
+  $file_name = rand(1, 88) . "_" . $file["name"];
+
+  $tmp_name = $file["tmp_name"];
+
+
+  $file_ext = pathinfo($file_name, PATHINFO_EXTENSION);
+
+
+  $file_ext = strtolower($file_ext); // png
+
+
+
+  $ext = $extension;
+
+  //            T 
+  if (!in_array($file_ext, $ext)) {
+
+
+
+    return 1;
+  }
+
+
+  $dest = rel_url . $dest . $file_name;
+
+  $abs = domain1 . $dest . $file_name;
+
+
+
+  if (move_uploaded_file($tmp_name, $dest)) {
+
+    $a = [
+      "rel_path" => $dest,
+      "abs_path" => $abs
+    ];
+
+    return $a;
+
+  } else {
+   return 7;
+  }
+
+}
 ?>

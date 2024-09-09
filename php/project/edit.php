@@ -31,7 +31,7 @@ if ($edit_chk_result->num_rows > 0) {
 
 <div class="container mt-5">
     <h1> DASHBOARD EDIT </h1>
-    <form action="<?php echo UPDATES; ?>" method="post" class="p-5 text-bg-dark">
+    <form action="<?php echo UPDATES; ?>" enctype="multipart/form-data" method="post" class="p-5 text-bg-dark">
         <input type="hidden" value="<?php echo $row_edit["user_id"] ?>" name="_token">
 
         <div class="mb-3">
@@ -53,6 +53,16 @@ if ($edit_chk_result->num_rows > 0) {
             <input type="text" value="<?php echo base64_decode($row_edit["ptoken"]) ?>" name="pswd" class="form-control"
                 id="exampleInputPassword1">
         </div>
+
+
+        <div class="mb-3">
+            <label for="" class="form-label">Choose file</label>
+            <input type="file" class="form-control" name="profile" id="" placeholder="" aria-describedby="fileHelpId" />
+            <div id="fileHelpId" class="form-text">Help text</div>
+        </div>
+
+
+        <!-- ================================================ -->
 
         <div class="mb-3 form-check">
             <input type="checkbox" class="form-check-input" id="exampleCheck1">
