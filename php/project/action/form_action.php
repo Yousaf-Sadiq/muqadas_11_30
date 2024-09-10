@@ -113,7 +113,7 @@ if (isset($_POST["updates"]) && !empty($_POST["updates"])) {
     $pswd = filterData($_POST["pswd"]);
     $userName = filterData($_POST["userName"]);
     $userID = filterData($_POST["_token"]);
-
+    $file_input = "profile";
 
     $status = [
         "error" => 0,
@@ -174,6 +174,65 @@ if (isset($_POST["updates"]) && !empty($_POST["updates"])) {
     }
 
 
+    // if file is uploading then
+    if (isset($_FILES[$file_input]["name"]) && !empty($_FILES[$file_input]["name"])) {
+
+        $ext = ["jpg", "png"];
+
+        $file = File_upload("profile", $ext, "assets/uploads/");
+
+        if ($file == 1) {
+
+            $s = implode(" ", $ext); // array to string 
+
+            $s = strtoupper($s);
+
+
+            $status["error"]++;
+
+            array_push($status["msg"], "{$s}  ONLY ALLOWED");
+
+        } else if ($file == 7) {
+            $status["error"]++;
+
+            array_push($status["msg"], "uploading  failed");
+
+        } else {
+
+
+            $file = json_encode($file);
+        }
+
+
+
+
+
+    }
+
+    // if file is not uploading then
+    else {
+        $adrs = "SELECT * FROM `" . ADDRESS . "` WHERE `user_id`='{$userID}'";
+        $adrs_exe = $conn->query($adrs);
+
+        if ($adrs_exe->num_rows > 0) {
+           
+            $row_adrs = $adrs_exe->fetch_assoc();
+
+            // $image = json_decode($row_adrs["images"], true);
+            $image = $row_adrs["images"];
+          
+          
+            $file = $image;
+
+
+
+        }
+        else{
+            $file = "";
+        }
+
+    }
+
 
 
 
@@ -191,10 +250,63 @@ if (isset($_POST["updates"]) && !empty($_POST["updates"])) {
 
         $encrpt = base64_encode($pswd);
 
+
+
+        $adrs = "SELECT * FROM `" . ADDRESS . "` WHERE `user_id`='{$userID}'";
+        $adrs_exe = $conn->query($adrs);
+
+        $address_id = null;
+
+        if ($adrs_exe->num_rows > 0) {
+
+            $row_adrs = $adrs_exe->fetch_assoc();
+
+            $address_id = $row_adrs["id"];
+
+            $output = false;
+            // update
+            $update_adrs = "UPDATE `" . ADDRESS . "` SET  `images`='{$file}',
+                `address_name`='NULL',`contact_info`='1234',`user_id`='{$userID}'
+                WHERE `user_id`='{$userID}'";
+
+            $update_adrs_exe = $conn->query($update_adrs);
+            if ($update_adrs_exe) {
+
+                if ($conn->affected_rows > 0) {
+                    $output = true;
+                }
+            }
+
+
+
+        } else {
+            $output = false;
+            // insert
+            $insert_adrs = "INSERT INTO `" . ADDRESS . "` (`images`, `address_name`, `contact_info`, `user_id`)
+            VALUES ('{$file}', 'none',1234,'{$userID}');";
+
+
+            $insert_adrs_exe = $conn->query($insert_adrs);
+            if ($insert_adrs_exe) {
+
+                if ($conn->affected_rows > 0) {
+                    $output = true;
+
+                    $address_id = $conn->insert_id;
+
+                }
+            }
+        }
+
+
+
+
+
+
         $update_q = "UPDATE `" . USER . "` SET 
         `user_name`='{$userName}' , `email`='{$email}', 
         `password`='{$H_password}', `ptoken`='{$encrpt}'  
-        
+        ,`address_id`='{$address_id}'
         WHERE `user_id`= '{$userID}'
         ";
 
@@ -226,8 +338,9 @@ if (isset($_POST["updates"]) && !empty($_POST["updates"])) {
 if (isset($_POST["upload"]) && !empty($_POST["upload"])) {
 
 
+    // pre($_FILES["profile"]);
 
-
+    // die();
     $ext = ["jpg", "png"];
 
     $file = File_upload("profile", $ext, "assets/uploads/");
