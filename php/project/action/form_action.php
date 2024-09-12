@@ -113,6 +113,7 @@ if (isset($_POST["updates"]) && !empty($_POST["updates"])) {
     $pswd = filterData($_POST["pswd"]);
     $userName = filterData($_POST["userName"]);
     $userID = filterData($_POST["_token"]);
+
     $file_input = "profile";
 
     $status = [
@@ -177,9 +178,37 @@ if (isset($_POST["updates"]) && !empty($_POST["updates"])) {
     // if file is uploading then
     if (isset($_FILES[$file_input]["name"]) && !empty($_FILES[$file_input]["name"])) {
 
+
+        $adrs = "SELECT * FROM `" . ADDRESS . "` WHERE `user_id`='{$userID}'";
+        $adrs_exe = $conn->query($adrs);
+
+        if ($adrs_exe->num_rows > 0) {
+
+            $row_adrs = $adrs_exe->fetch_assoc();
+
+            // $image = json_decode($row_adrs["images"], true);
+            if (isset($row_adrs["images"]) && !empty($row_adrs["images"])) {
+                # code...
+                $old_image = json_decode($row_adrs["images"], true);
+
+
+                if (file_exists($old_image["rel_path"])) {
+                    unlink($old_image["rel_path"]);
+                }
+            }
+
+        }
+
+
+
+
         $ext = ["jpg", "png"];
 
-        $file = File_upload("profile", $ext, "assets/uploads/");
+        $file = File_upload($file_input, $ext, "assets/uploads/");
+
+
+
+
 
         if ($file == 1) {
 
@@ -211,23 +240,29 @@ if (isset($_POST["updates"]) && !empty($_POST["updates"])) {
 
     // if file is not uploading then
     else {
+
         $adrs = "SELECT * FROM `" . ADDRESS . "` WHERE `user_id`='{$userID}'";
         $adrs_exe = $conn->query($adrs);
 
         if ($adrs_exe->num_rows > 0) {
-           
+
             $row_adrs = $adrs_exe->fetch_assoc();
 
             // $image = json_decode($row_adrs["images"], true);
-            $image = $row_adrs["images"];
-          
-          
-            $file = $image;
+            if (!isset($row_adrs["images"]) && empty($row_adrs["images"])) {
+                # code...
+                $file = "";
+            } else {
+                $image = $row_adrs["images"];
+
+                $file = $image;
+            }
 
 
 
-        }
-        else{
+
+
+        } else {
             $file = "";
         }
 
@@ -263,11 +298,17 @@ if (isset($_POST["updates"]) && !empty($_POST["updates"])) {
 
             $address_id = $row_adrs["id"];
 
+
+
+            // one to one 
             $output = false;
             // update
             $update_adrs = "UPDATE `" . ADDRESS . "` SET  `images`='{$file}',
                 `address_name`='NULL',`contact_info`='1234',`user_id`='{$userID}'
                 WHERE `user_id`='{$userID}'";
+
+
+
 
             $update_adrs_exe = $conn->query($update_adrs);
             if ($update_adrs_exe) {
