@@ -25,6 +25,7 @@ define("DASHBOARD",domain1."dashboard.php");
 define("INSERTS",domain1."/action/form_action.php");
 
 define("UPDATES",domain1."/action/form_action.php");
+define("DELETES",domain1."/action/form_action.php");
 
 
 const EDIT= domain1."edit.php";

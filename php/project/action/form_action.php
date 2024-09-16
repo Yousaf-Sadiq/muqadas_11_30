@@ -373,9 +373,57 @@ if (isset($_POST["updates"]) && !empty($_POST["updates"])) {
 
 
 
+if (isset($_POST["deletes"]) && !empty($_POST["deletes"])) {
+
+    $userID = $_POST["id"];
+
+
+
+
+
+    $adrs = "SELECT * FROM `" . ADDRESS . "` WHERE `user_id`='{$userID}'";
+    $adrs_exe = $conn->query($adrs);
+
+    if ($adrs_exe->num_rows > 0) {
+
+        $row_adrs = $adrs_exe->fetch_assoc();
+
+        // $image = json_decode($row_adrs["images"], true);
+        if (isset($row_adrs["images"]) && !empty($row_adrs["images"])) {
+            # code...
+            $old_image = json_decode($row_adrs["images"], true);
+
+
+            if (file_exists($old_image["rel_path"])) {
+                unlink($old_image["rel_path"]);
+            }
+        }
+        // ====================================================================
+
+        $address_delete = "DELETE FROM `" . ADDRESS . "` WHERE `user_id`='{$userID}'";
+        $address_delete_exe = $conn->query($address_delete);
+
+    }
+
+
+
+    
+    $address_delete = "DELETE FROM `" . USER . "` WHERE `user_id`='{$userID}'";
+    $address_delete_exe = $conn->query($address_delete);
+
+    if ($address_delete_exe) {
+        if ($conn->affected_rows > 0) {
+            SuccessMsg("DATA HAS BEEN DELETED");
+        }
+    }
+
+    RefreshUrl(2,DASHBOARD);
+
+}
+
+
+
 //  uploads 
-
-
 if (isset($_POST["upload"]) && !empty($_POST["upload"])) {
 
 

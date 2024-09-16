@@ -90,16 +90,17 @@ function File_upload(string $input, array $extension, $dest)
   }
 
 
-  $dest = rel_url . $dest . $file_name;
+  $rel_path = rel_url . $dest . $file_name;
+
 
   $abs = domain1 . $dest . $file_name;
 
 
 
-  if (move_uploaded_file($tmp_name, $dest)) {
+  if (move_uploaded_file($tmp_name, $rel_path)) {
 
     $a = [
-      "rel_path" => $dest,
+      "rel_path" => $rel_path,
       "abs_path" => $abs
     ];
 
