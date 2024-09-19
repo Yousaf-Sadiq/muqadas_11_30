@@ -107,8 +107,16 @@ function File_upload(string $input, array $extension, $dest)
     return $a;
 
   } else {
-   return 7;
+    return 7;
   }
 
+}
+
+
+function GetFileURLNAME($filename)
+{
+  //              helper                                        .              php
+  $a = pathinfo($filename, PATHINFO_FILENAME) . "." . pathinfo($filename, PATHINFO_EXTENSION);
+  return $a;
 }
 ?>

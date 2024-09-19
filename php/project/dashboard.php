@@ -3,7 +3,15 @@ require_once dirname(__FILE__) . "/layouts/admin/header.php";
 // echo dirname(__FILE__); // relative url
 // echo __FILE__;
 // echo __DIR__;
+
 // echo rel_url;
+
+// session_destroy();
+if (!isset($_SESSION["user_id"]) && empty($_SESSION["user_name"])) {
+
+        Redirect_url(LOGIN);
+}
+
 ?>
 
 
@@ -22,7 +30,7 @@ require_once dirname(__FILE__) . "/layouts/admin/header.php";
         </form> -->
 
         <h1> DASHBOARD</h1>
-        <form action="<?php echo INSERTS; ?>" method="post" class="p-5 text-bg-dark">
+        <!-- <form action="<?php echo INSERTS; ?>" method="post" class="p-5 text-bg-dark">
 
                 <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Email address</label>
@@ -42,7 +50,7 @@ require_once dirname(__FILE__) . "/layouts/admin/header.php";
 
 
                 <input type="submit" value="INSERT" name="inserts" class="btn btn-primary">
-        </form>
+        </form> -->
 
 </div>
 
@@ -50,7 +58,7 @@ require_once dirname(__FILE__) . "/layouts/admin/header.php";
 <div class="table-responsive mt-3">
         <?php
 
-        $all = "SELECT * FROM `" . USER . "`";
+        $all = "SELECT * FROM `" . USER . "` WHERE `user_id`='{$_SESSION["user_id"]}'";
         $all_exe = $conn->query($all);
 
         if ($all_exe->num_rows > 0) {
