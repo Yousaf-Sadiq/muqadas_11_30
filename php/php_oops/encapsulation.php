@@ -6,6 +6,8 @@ oops (object oriented programming)
 1. encapsulation (information hiding) 
 2. inheritance  (data sharing)
 3. polymorphism (same data use in different categories)
+        a. method overloading
+        b. mehod overriding
 4. abstraction ( to combine common things )
 
  */
