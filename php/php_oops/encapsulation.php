@@ -1,5 +1,5 @@
 <?php
-
+namespace abc;
 /**
 oops (object oriented programming) 
 
@@ -48,11 +48,11 @@ class A
 
 
 
-$p = new A; // object 
+// $p = new A; // object 
 
-$p->SetValue(5, 5);
+// $p->SetValue(5, 5);
 
-echo $p->calculate();
+// echo $p->calculate();
 
 
 ?>
