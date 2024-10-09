@@ -5,6 +5,7 @@ require_once dirname(__DIR__) . "/include/table.php";
 require_once dirname(__DIR__) . "/include/web.php";
 require_once dirname(__FILE__) . "/trait/checkTable.php";
 require_once dirname(__FILE__) . "/trait/insert.php";
+require_once dirname(__FILE__) . "/trait/customSql.php";
 
 class DB
 {
@@ -34,7 +35,7 @@ class DB
 
 
 
-    use \CheckTable, \INserts;
+    use \CheckTable, \INserts,\Mysql;
 
 
 

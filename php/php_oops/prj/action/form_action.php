@@ -39,6 +39,16 @@ if (isset($_POST["inserts"]) && !empty($_POST["inserts"])) {
     }
 
 
+    $check = "SELECT * FROM `" . USER . "`  WHERE `email`='{$email}'";
+    
+    $exe= $db->MySql($check , true);
+
+    if ($exe) {
+       $status['error']++;
+       array_push($status['msg'], "EMAIL ALREADY EXISTS");
+    }
+
+
     if ($status["error"] > 0) {
 
         echo json_encode($status);
