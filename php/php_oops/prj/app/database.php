@@ -6,6 +6,8 @@ require_once dirname(__DIR__) . "/include/web.php";
 require_once dirname(__FILE__) . "/trait/checkTable.php";
 require_once dirname(__FILE__) . "/trait/insert.php";
 require_once dirname(__FILE__) . "/trait/customSql.php";
+require_once dirname(__FILE__) . "/trait/select.php";
+require_once dirname(__FILE__) . "/trait/getResult.php";
 
 class DB
 {
@@ -35,7 +37,7 @@ class DB
 
 
 
-    use \CheckTable, \INserts,\Mysql;
+    use \CheckTable, \INserts, \Mysql, \Select, \GetResult;
 
 
 
@@ -58,6 +60,13 @@ class helper extends DB
         $data = $this->conn->real_escape_string($data);
 
         return $data;
+    }
+
+    public function pre(array $a)
+    {
+        echo "<pre>";
+        print_r($a);
+        echo "</pre>";
     }
 }
 

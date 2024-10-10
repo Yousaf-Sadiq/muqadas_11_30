@@ -1,0 +1,50 @@
+<?php
+
+trait Select
+{
+    public function select(string $table, string $row = "*", string $where = null, string $orderBy = null, string $limit = null)
+    {
+        /**
+          SELECT * FROM table_name
+          SELECT * FROM table_name WHERE `col_name`='value'
+          SELECT * FROM table_name WHERE `col_name`='value' ORDERBY ID DESC
+          SELECT * FROM table_name WHERE `col_name`='value' ORDERBY ID ASC  LIMIT 5
+          
+         */
+        if ($this->CheckTable($table)) {
+
+            $this->query = "SELECT {$row} FROM `{$table}`";
+
+            if ($where != null) {
+                $this->query .= " WHERE {$where}";
+            }
+
+
+            if ($orderBy != null) {
+                $this->query .= " ORDERBY {$orderBy}";
+            }
+
+            if ($limit != null) {
+                $this->query .= " LIMIT {$limit}";
+            }
+
+
+            $this->exe = $this->conn->query($this->query);
+
+            if ($this->exe) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+
+
+
+
+    }
+}
+
+
+?>

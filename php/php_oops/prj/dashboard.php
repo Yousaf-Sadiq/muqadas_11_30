@@ -2,8 +2,10 @@
 require_once dirname(__FILE__) . "/layout/header.php";
 
 use app\database\DB as DB;
+use app\database\helper as help;
 
-$a = new DB();
+$db = new DB();
+$help = new help();
 
 // $t = [
 //     "email" => "xs2321321adsad",
@@ -44,6 +46,45 @@ $a = new DB();
     </form>
 </div>
 
+<div class="table-responsive container">
+    <?php
+    $fetch = $db->select(USER, "*");
+
+    if ($fetch) {
+        echo "QUERY OK";
+        $row = $db->get_result();
+        // $help->pre($row);
+    }
+    ?>
+    <table class="table table-dark table-hover table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">EMAIL</th>
+                <th scope="col">USER NAME</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            $count = 1;
+            foreach ($row as $key => $value) {
+                # code...
+            
+                ?>
+                <tr class="">
+                    <td scope="row"><?php echo $count; ?></td>
+                    <td><?php echo $value["email"] ?></td>
+                    <td><?php echo $value["user_name"] ?></td>
+
+                </tr>
+                <?php
+                $count++;
+            } ?>
+        </tbody>
+    </table>
+</div>
+
+
 <?php
 require_once dirname(__FILE__) . "/layout/footer.php";
 
@@ -76,7 +117,7 @@ require_once dirname(__FILE__) . "/layout/footer.php";
             for (const key in res.msg) {
                 alertMsg(res.msg[key], "danger", "error")
             }
-        }else{
+        } else {
 
             alertMsg(res.msg, "success", "error")
 

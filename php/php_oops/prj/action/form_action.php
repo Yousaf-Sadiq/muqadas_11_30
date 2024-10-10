@@ -6,7 +6,6 @@ use app\database\DB as DB;
 $db = new DB();
 $help = new help;
 
-
 if (isset($_POST["inserts"]) && !empty($_POST["inserts"])) {
 
     $user_name = $help->FilterData($_POST["user_name"]);
