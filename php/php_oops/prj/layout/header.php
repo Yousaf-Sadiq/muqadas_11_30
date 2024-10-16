@@ -22,6 +22,7 @@ require_once dirname(__DIR__) . "/app/database.php";
             position: fixed;
             top: 10px;
             right: 10px;
+            z-index:999999;
         }
     </style>
 
