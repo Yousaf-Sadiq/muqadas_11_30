@@ -145,4 +145,45 @@ if (isset($_POST["updates"]) && !empty($_POST["updates"])) {
 }
 
 
+
+
+if (isset($_POST["deletes"]) && !empty($_POST["deletes"])) {
+
+
+    $user_id = $help->FilterData($_POST["user_id"]);
+
+    $status = [
+        "error" => 0,
+        "msg" => []
+    ];
+
+
+    $check = "SELECT * FROM `" . USER . "`  WHERE `user_id`='{$user_id}'";
+
+    $exe = $db->MySql($check, true);
+
+    if (!$exe) {
+        $status['error']++;
+        array_push($status['msg'], "RECORD NOT FOUND");
+    }
+
+
+    if ($status["error"] > 0) {
+
+        echo json_encode($status);
+
+        return;
+    } else {
+
+
+
+
+
+
+        echo $db->delete(USER, "`user_id`='{$user_id}'");
+
+    }
+}
+
+
 ?>

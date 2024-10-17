@@ -2,7 +2,7 @@
 
 trait Select
 {
-    public function select(string $table, string $row = "*", string $where = null, string $orderBy = null, string $limit = null)
+    public function select(bool $numRow = false, string $table, string $row = "*", string $where = null, string $orderBy = null, string $limit = null)
     {
         /**
           SELECT * FROM table_name
@@ -32,7 +32,19 @@ trait Select
             $this->exe = $this->conn->query($this->query);
 
             if ($this->exe) {
+
+
+
+                if ($numRow) {
+                    if ($this->exe->num_rows > 0) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+
                 return true;
+
             } else {
                 return false;
             }

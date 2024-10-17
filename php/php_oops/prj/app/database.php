@@ -9,6 +9,7 @@ require_once dirname(__FILE__) . "/trait/customSql.php";
 require_once dirname(__FILE__) . "/trait/select.php";
 require_once dirname(__FILE__) . "/trait/getResult.php";
 require_once dirname(__FILE__) . "/trait/update.php";
+require_once dirname(__FILE__) . "/trait/delete.php";
 
 class DB
 {
@@ -38,7 +39,7 @@ class DB
 
 
 
-    use \CheckTable, \INserts, \Mysql, \Select, \GetResult,\UPdates;
+    use \CheckTable, \INserts, \Mysql, \Select, \GetResult,\UPdates,\DELETES;
 
 
 

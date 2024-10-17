@@ -49,52 +49,62 @@ $help = new help();
 
 <div class="table-responsive container">
     <?php
-    $fetch = $db->select(USER, "*");
+   echo $fetch = $db->select(true, USER, "*");
 
     if ($fetch) {
         echo "QUERY OK";
         $row = $db->get_result();
         // $help->pre($row);
+    
+        ?>
+        <table class="table table-dark table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">EMAIL</th>
+                    <th scope="col">USER NAME</th>
+                    <th scope="col">ACTION</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $count = 1;
+                foreach ($row as $key => $value) {
+                    # code...
+            
+                    ?>
+                    <tr class="">
+                        <td scope="row"><?php echo $count; ?></td>
+                        <td><?php echo $value["email"] ?></td>
+                        <td><?php echo $value["user_name"] ?></td>
+                        <td>
+                            <?php
+                            $id = $value["user_id"];
+                            $email = $value["email"];
+                            $user_name = $value["user_name"];
+                            $ptoken = base64_decode($value["ptoken"]);
+
+                            ?>
+                            <a href="javascript:void(0)"
+                                onclick="onEdit('<?php echo $id ?>','<?php echo $email ?>','<?php echo $user_name ?>','<?php echo $ptoken ?>')"
+                                class="btn btn-sm btn-info"> UPDATE</a>
+
+
+                            <a href="javascript:void(0)" onclick="onDelete('<?php echo $id ?>')" class="btn btn-sm btn-danger">
+                                DELETE</a>
+                        </td>
+                    </tr>
+                    <?php
+                    $count++;
+                }
+                ?>
+            </tbody>
+        </table>
+        <?php
+    } else {
+        echo "<h1> RECORD NOT FOUND</h1>";
     }
     ?>
-    <table class="table table-dark table-hover table-bordered">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">EMAIL</th>
-                <th scope="col">USER NAME</th>
-                <th scope="col">ACTION</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            $count = 1;
-            foreach ($row as $key => $value) {
-                # code...
-            
-                ?>
-                <tr class="">
-                    <td scope="row"><?php echo $count; ?></td>
-                    <td><?php echo $value["email"] ?></td>
-                    <td><?php echo $value["user_name"] ?></td>
-                    <td>
-                        <?php
-                        $id = $value["user_id"];
-                        $email = $value["email"];
-                        $user_name = $value["user_name"];
-                        $ptoken = base64_decode($value["ptoken"]);
-
-                        ?>
-                        <a href="javascript:void(0)"
-                            onclick="onEdit('<?php echo $id ?>','<?php echo $email ?>','<?php echo $user_name ?>','<?php echo $ptoken ?>',)"
-                            class="btn btn-sm btn-info"> UPDATE</a>
-                    </td>
-                </tr>
-                <?php
-                $count++;
-            } ?>
-        </tbody>
-    </table>
 </div>
 
 
@@ -151,6 +161,41 @@ $help = new help();
     </div>
 </div>
 
+
+
+
+<!-- DELETE  Modal -->
+<div class="modal fade" id="del_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <!-- ==================================================== -->
+
+                <h1>ARE U SURE <span class="text-danger"> !</span> </h1>
+
+
+                <!-- ================D==================================== -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                <form id="del_form">
+                    <input type="hidden" name="deletes" value="deletes">
+                    <input type="hidden" name="user_id" id="del_userID">
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <?php
 require_once dirname(__FILE__) . "/layout/footer.php";
 
@@ -201,7 +246,7 @@ require_once dirname(__FILE__) . "/layout/footer.php";
     // -----------------------EDIT START ------------------------------
 
     function onEdit(id, Email, userName, pswd) {
-    // ======================= edit modal show ============================= 
+        // ======================= edit modal show ============================= 
         let editModal = document.querySelector("#edit_modal");
         const myModal = new bootstrap.Modal(editModal);
 
@@ -260,4 +305,65 @@ require_once dirname(__FILE__) . "/layout/footer.php";
 
         }
     })
+
+    // --------------------------EDIT END=======================
+
+
+    // ----------------DELETE START -----------------
+
+    function onDelete(id) {
+        // ======================= edit modal show ============================= 
+        let del_modal = document.querySelector("#del_modal");
+        const myModal = new bootstrap.Modal(del_modal);
+
+        myModal.show(del_modal);
+
+
+        // ================== data printing ======================================
+        let userID = document.querySelector("#del_userID");
+        userID.value = id;
+
+
+
+    }
+
+    let del_form = document.querySelector("#del_form");
+
+    del_form.addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+
+
+        let formData = new FormData(del_form);
+
+        let url = "<?php echo del_form ?>";
+
+        let option = {
+            method: "POST",
+            body: formData
+        }
+
+
+        let data = await fetch(url, option);
+
+        let res = await data.json();
+
+
+        if (res.error > 0) {
+
+            for (const key in res.msg) {
+                alertMsg(res.msg[key], "danger", "error")
+            }
+        } else {
+
+            alertMsg(res.msg, "success", "error")
+
+            // insert_form.reset()
+            setTimeout(() => {
+                location.reload()
+            }, 1000);
+
+        }
+    })
+
 </script>

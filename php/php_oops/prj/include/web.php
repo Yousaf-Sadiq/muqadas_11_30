@@ -7,4 +7,5 @@ const abs_url = Server . Folder;
 
 const insert_form = abs_url . "action/form_action.php";
 const Edit_form = abs_url . "action/form_action.php";
+const del_form = abs_url . "action/form_action.php";
 ?>
