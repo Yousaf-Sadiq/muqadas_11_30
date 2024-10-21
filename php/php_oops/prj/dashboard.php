@@ -49,7 +49,7 @@ $help = new help();
 
 <div class="table-responsive container">
     <?php
-   echo $fetch = $db->select(true, USER, "*");
+    echo $fetch = $db->select(true, USER, "*");
 
     if ($fetch) {
         echo "QUERY OK";
@@ -110,7 +110,7 @@ $help = new help();
 
 
 <!-- edit  Modal -->
-<div class="modal fade" id="edit_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+<div class="modal fade modal-lg" id="edit_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -125,6 +125,26 @@ $help = new help();
                 <form class="text-bg-dark p-5" id="edit_form">
                     <input type="hidden" name="updates" value="update">
                     <input type="hidden" name="user_id" id="userID">
+
+
+                    <div class="mb-3 row ">
+
+                        <div class="col-8 ">
+                            <label for="profile" class="form-label">PROFILE</label>
+
+                            <input type="file" class="form-control" name="profile" id="profile"
+                                aria-describedby="emailHelp">
+
+                            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                        </div>
+
+                        <div class="col-4">
+                            <img src="" id="img-preview" width="150" height="150" alt="">
+                        </div>
+                    </div>
+
+
+
                     <div class="mb-3">
                         <label for="user_name" class="form-label">user name</label>
 
@@ -203,6 +223,41 @@ require_once dirname(__FILE__) . "/layout/footer.php";
 ?>
 
 <script>
+    //  show image preview on selection 
+
+    let profile = document.querySelector("#profile");
+
+
+
+    profile.addEventListener("change", function () {
+
+
+        let a = profile.files[0];
+
+
+
+
+        let read = new FileReader();
+
+        read.onload = function (e) {
+
+            let imgUrl = e.target.result;
+
+
+
+            let preview = document.querySelector("#img-preview");
+
+            preview.src = imgUrl;
+        }
+
+
+        if (a) {
+
+            read.readAsDataURL(a);
+        }
+    })
+
+    // ----------------------------------------------------------
 
     //==========================insert start======
     let insert_form = document.querySelector("#insert_form");
@@ -276,7 +331,16 @@ require_once dirname(__FILE__) . "/layout/footer.php";
     edit_form.addEventListener("submit", async (e) => {
         e.preventDefault();
 
+        let profile = document.querySelector("#profile");
+
+        let file = profile.files[0];
+
         let formData = new FormData(edit_form);
+
+        formData.append("profile", file);
+
+
+
         let url = "<?php echo Edit_form ?>";
 
         let option = {

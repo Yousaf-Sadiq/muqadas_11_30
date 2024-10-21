@@ -83,6 +83,10 @@ if (isset($_POST["updates"]) && !empty($_POST["updates"])) {
     $pswd = $help->FilterData($_POST["password"]);
     $user_id = $help->FilterData($_POST["user_id"]);
 
+    $profile = $_FILES["profile"];
+
+    $file = NULL;
+
     $status = [
         "error" => 0,
         "msg" => []
@@ -119,6 +123,57 @@ if (isset($_POST["updates"]) && !empty($_POST["updates"])) {
     }
 
 
+
+    if (isset($profile["name"]) && !empty($profile["name"])) {
+
+
+        $chk_adrs = "SELECT * FROM `" . UADDRESS . "` WHERE `user_id`= '{$user_id}'";
+
+        $exe_adrs = $db->MySql($chk_adrs, true);
+
+        if ($exe_adrs) {
+
+            $getAdrs = $db->get_result();
+
+            if (isset($getAdrs[0]["images"]) && !empty($getAdrs[0]["images"])) {
+
+                $img = json_decode($getAdrs[0]["images"], true);
+
+                if (file_exists($img["relUrl"])) {
+                    unlink($img["relUrl"]);
+                }
+            }
+
+        }
+
+
+
+        $ext = ["jpg", "png"];
+        $file = $help->FIleUPload("profile", $ext, "assets/upload");
+
+        if ($file == 1) {
+            $str = implode(" ", $ext); // jpg png
+            $str = strtoupper($str);
+            $status['error']++;
+            array_push($status['msg'], "ONLY {$str} ALLOWED ");
+
+        } else if ($file == 2) {
+            $status['error']++;
+            array_push($status['msg'], "File UPLOADING ERROR");
+
+        } else if (is_array($file)) {
+
+            $file = json_encode($file);
+
+        } else {
+            $status['error']++;
+            array_push($status['msg'], "File ERROR");
+        }
+    }
+
+
+
+
     if ($status["error"] > 0) {
 
         echo json_encode($status);
@@ -129,17 +184,51 @@ if (isset($_POST["updates"]) && !empty($_POST["updates"])) {
         $password = password_hash($pswd, PASSWORD_BCRYPT);
         $encrpt = base64_encode($pswd);
 
+
+
+
+
+        $data2 = [
+            "images" => $file,
+            "user_id" => $user_id
+        ];
+
+        $chk_adrs = "SELECT * FROM `" . UADDRESS . "` WHERE `user_id`= '{$user_id}'";
+
+        $exe_adrs = $db->MySql($chk_adrs, true);
+
+        $adrs_id = NULL;
+        if ($exe_adrs) {
+
+
+            $getAdrs = $db->get_result();
+
+            $adrs_id = $getAdrs[0]["id"];
+
+            // $help->pre($data2);
+            $db->update(UADDRESS, $data2, "`user_id`='{$user_id}'");
+
+
+        } else {
+
+            $db->inserts(UADDRESS, $data2);
+
+            $adrs_id = $db->getID();
+        }
+
+
         $data = [
             "email" => $email,
             "password" => $password,
             "user_name" => $user_name,
-            "ptoken" => $encrpt
+            "ptoken" => $encrpt,
+            "address_id" => $adrs_id
         ];
 
 
-
-
         echo $db->update(USER, $data, "`user_id`='{$user_id}'");
+
+
 
     }
 }
