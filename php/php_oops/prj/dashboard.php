@@ -49,11 +49,14 @@ $help = new help();
 
 <div class="table-responsive container">
     <?php
-    echo $fetch = $db->select(true, USER, "*");
+    $join = "INNER JOIN  `user_address` ON users.address_id =user_address.id ";
+
+    $fetch = $db->select(true, USER, "*", null, null, null, $join);
 
     if ($fetch) {
-        echo "QUERY OK";
+        // echo "QUERY OK";
         $row = $db->get_result();
+
         // $help->pre($row);
     
         ?>
@@ -61,6 +64,7 @@ $help = new help();
             <thead>
                 <tr>
                     <th scope="col">#</th>
+                    <th scope="col">IMAGE</th>
                     <th scope="col">EMAIL</th>
                     <th scope="col">USER NAME</th>
                     <th scope="col">ACTION</th>
@@ -71,10 +75,19 @@ $help = new help();
                 $count = 1;
                 foreach ($row as $key => $value) {
                     # code...
-            
+                    if (isset($value["images"]) && !empty($value["images"])) {
+                        $image = json_decode($value["images"], true);
+
+                        $img = $image["absUrl"];
+                    } else {
+                        $img = abs_url . "/assets/default.jpg";
+                    }
                     ?>
                     <tr class="">
                         <td scope="row"><?php echo $count; ?></td>
+                        <td class="w-25">
+                            <img src="<?php echo $img ?>" class="img-thumbnail img-fluid" alt="">
+                        </td>
                         <td><?php echo $value["email"] ?></td>
                         <td><?php echo $value["user_name"] ?></td>
                         <td>
@@ -83,10 +96,11 @@ $help = new help();
                             $email = $value["email"];
                             $user_name = $value["user_name"];
                             $ptoken = base64_decode($value["ptoken"]);
+                            // $profile = base64_decode($value["ptoken"]);
 
                             ?>
                             <a href="javascript:void(0)"
-                                onclick="onEdit('<?php echo $id ?>','<?php echo $email ?>','<?php echo $user_name ?>','<?php echo $ptoken ?>')"
+                                onclick="onEdit('<?php echo $id ?>','<?php echo $email ?>','<?php echo $user_name ?>','<?php echo $ptoken ?>','<?php echo $img ?>')"
                                 class="btn btn-sm btn-info"> UPDATE</a>
 
 
@@ -300,7 +314,7 @@ require_once dirname(__FILE__) . "/layout/footer.php";
 
     // -----------------------EDIT START ------------------------------
 
-    function onEdit(id, Email, userName, pswd) {
+    function onEdit(id, Email, userName, pswd,img) {
         // ======================= edit modal show ============================= 
         let editModal = document.querySelector("#edit_modal");
         const myModal = new bootstrap.Modal(editModal);
@@ -320,6 +334,11 @@ require_once dirname(__FILE__) . "/layout/footer.php";
 
         let password = document.querySelector("#password");
         password.value = pswd;
+
+        let profile = document.querySelector("#img-preview");
+        profile.src = img;
+
+        
 
 
 

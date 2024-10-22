@@ -2,7 +2,7 @@
 
 trait Select
 {
-    public function select(bool $numRow = false, string $table, string $row = "*", string $where = null, string $orderBy = null, string $limit = null)
+    public function select(bool $numRow = false, string $table, string $row = "*", string $where = null, string $orderBy = null, string $limit = null, string $join = null)
     {
         /**
           SELECT * FROM table_name
@@ -14,6 +14,14 @@ trait Select
         if ($this->CheckTable($table)) {
 
             $this->query = "SELECT {$row} FROM `{$table}`";
+
+
+
+            if ($join != null) {
+                $this->query .= " {$join}";
+            }
+
+
 
             if ($where != null) {
                 $this->query .= " WHERE {$where}";
@@ -29,6 +37,7 @@ trait Select
             }
 
 
+            // echo $this->query;
             $this->exe = $this->conn->query($this->query);
 
             if ($this->exe) {

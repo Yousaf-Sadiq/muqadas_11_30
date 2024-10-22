@@ -213,6 +213,7 @@ if (isset($_POST["updates"]) && !empty($_POST["updates"])) {
 
             $db->inserts(UADDRESS, $data2);
 
+            // echo "else";
             $adrs_id = $db->getID();
         }
 
