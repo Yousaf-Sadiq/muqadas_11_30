@@ -3,7 +3,7 @@
 trait INserts
 {
 
-  public function inserts(string $table, array $data)
+  public function inserts(string $table, array $data, $msg = "DATA HAS BEEN INSERTED")
   {
     $status = [
       "error" => 0,
@@ -34,7 +34,7 @@ trait INserts
       $this->exe = $this->conn->query($this->query);
       if ($this->exe && $this->conn->affected_rows > 0) {
 
-        array_push($status['msg'], "DATA HAS BEEN INSERTED");
+        array_push($status['msg'], $msg);
       } else {
 
         $status["error"]++;

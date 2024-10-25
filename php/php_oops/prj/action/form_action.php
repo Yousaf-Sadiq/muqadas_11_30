@@ -70,6 +70,22 @@ if (isset($_POST["inserts"]) && !empty($_POST["inserts"])) {
 
         echo $db->inserts(USER, $data);
 
+        $userID = $db->getID();
+
+        $data2 = [
+            "user_id" => $userID
+        ];
+
+        $db->inserts(UADDRESS, $data2);
+
+        $adrs_id = $db->getID();
+
+
+        $dataU = [
+            "address_id" => $adrs_id
+        ];
+        $db->update(USER, $dataU, "`user_id`='{$userID}'");
+
     }
 }
 

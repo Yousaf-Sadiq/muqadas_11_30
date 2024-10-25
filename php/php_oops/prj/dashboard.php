@@ -7,6 +7,14 @@ use app\database\helper as help;
 $db = new DB();
 $help = new help();
 
+
+if (!isset($_SESSION["user_id"]) && empty($_SESSION["user_id"])) {
+    header("Location:" . lOGIN);
+}
+
+$S_userID = $_SESSION["user_id"];
+
+// echo $_SESSION["email"];
 // $t = [
 //     "email" => "xs2321321adsad",
 //     "password" => "xs1234",
@@ -19,7 +27,7 @@ $help = new help();
 
 
 
-<div class="container-fluid p-5">
+<!-- <div class="container-fluid p-5">
 
     <form class="text-bg-dark p-5" id="insert_form">
         <input type="hidden" name="inserts" value="inserts">
@@ -45,14 +53,14 @@ $help = new help();
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-</div>
+</div> -->
 
-<div class="table-responsive container">
+<div class="table-responsive container m-5">
     <?php
     $join = "INNER JOIN  `user_address` ON users.address_id =user_address.id ";
 
-    $fetch = $db->select(true, USER, "*", null, null, null, $join);
-
+    $fetch = $db->select(true, USER, "*", "users.user_id ='{$S_userID}'", null, null, $join);
+    
     if ($fetch) {
         // echo "QUERY OK";
         $row = $db->get_result();
@@ -97,7 +105,7 @@ $help = new help();
                             $user_name = $value["user_name"];
                             $ptoken = base64_decode($value["ptoken"]);
                             // $profile = base64_decode($value["ptoken"]);
-
+                    
                             ?>
                             <a href="javascript:void(0)"
                                 onclick="onEdit('<?php echo $id ?>','<?php echo $email ?>','<?php echo $user_name ?>','<?php echo $ptoken ?>','<?php echo $img ?>')"
@@ -314,7 +322,7 @@ require_once dirname(__FILE__) . "/layout/footer.php";
 
     // -----------------------EDIT START ------------------------------
 
-    function onEdit(id, Email, userName, pswd,img) {
+    function onEdit(id, Email, userName, pswd, img) {
         // ======================= edit modal show ============================= 
         let editModal = document.querySelector("#edit_modal");
         const myModal = new bootstrap.Modal(editModal);
@@ -338,7 +346,7 @@ require_once dirname(__FILE__) . "/layout/footer.php";
         let profile = document.querySelector("#img-preview");
         profile.src = img;
 
-        
+
 
 
 

@@ -1,8 +1,8 @@
 <?php
 declare(strict_types=1);
 namespace app\database;
+session_start();
 
-use GetID;
 
 require_once dirname(__DIR__) . "/include/table.php";
 require_once dirname(__DIR__) . "/include/web.php";

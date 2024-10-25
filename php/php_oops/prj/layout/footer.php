@@ -8,6 +8,35 @@
     crossorigin="anonymous"></script>
 
 <script>
+    let logout = document.querySelector("#logout");
+
+    logout.addEventListener("click", async function () {
+
+        let url = "<?php echo LOGOUT ?>";
+        let data = await fetch(url);
+        let res = await data.json();
+
+
+        if (res.error > 0) {
+
+            for (const key in res.msg) {
+                alertMsg(res.msg[key], "danger", "error")
+            }
+        } else {
+
+            alertMsg(res.msg, "success", "error")
+
+            // insert_form.reset()
+            setTimeout(() => {
+                location.href = "<?php echo lOGIN ?>";
+            }, 1000);
+
+        }
+    })
+
+
+
+    // Add event listener to the button
     function alertMsg(msg, classes, id) {
 
         const alertPlaceholder = document.getElementById(id)
@@ -23,7 +52,7 @@
             ].join('')
 
             alertPlaceholder.append(wrapper)
-            
+
             wrapper.style.transition = "all 0.75s ease-in-out";
 
             setTimeout(() => {
